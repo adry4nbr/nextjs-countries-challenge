@@ -30,13 +30,15 @@ Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmen
 - [x] **Consumo de API:** Integração com a REST Countries API para listagem de dados.
 - [x] **Interface Responsiva:** Criação do layout principal adaptável para dispositivos móveis, tablets e desktops.
 - [x] **Refatoração de Layout (Flexbox):** Ajuste fino da estrutura de listagem utilizando Flexbox para garantir consistência visual no tamanho dos cards.
+- [x] **Alternador de Tema (Dark/Light Mode):** Implementação da funcionalidade para alternar dinamicamente entre os modos claro e escuro.
+- [x] **Barra de Pesquisa:** Implementação do input para busca de países por nome.
+- [x] **Filtro por Região:** Componente de seleção para filtrar os países por continente/sub-região.
+- [x] **Página de Detalhes:** Criação da rota dinâmica para exibir informações aprofundadas de um país específico ao clicar no seu card.
 
 ### ⏳ O que está a ser feito / Próximos Passos
 
-- [ ] **Alternador de Tema (Dark/Light Mode):** Implementação da funcionalidade para alternar dinamicamente entre os modos claro e escuro.
-- [ ] **Barra de Pesquisa:** Implementação do input para busca de países por nome.
-- [ ] **Filtro por Região:** Componente de seleção para filtrar os países por continente/sub-região.
-- [ ] **Página de Detalhes:** Criação da rota dinâmica para exibir informações aprofundadas de um país específico ao clicar no seu card.
+- [ ] **Ajustar o design/CSS** Garantir que os cards e a página de detalhes estejam bonitos e responsivos
+- [ ] **Criar a tela de Carregamento (Loading/Skeleton)** Para quando o site estiver puxando os dados da API.
 
 ---
 
