@@ -1,26 +1,17 @@
 import { getCountries } from "@/services/api";
-import CountryCard from "@/components/CountryCard";
+import CountryList from "@/components/CountryList";
 
 export default async function Home() {
+  // Busca os dados no servidor (ótimo para SEO e performance inicial)
   const countries = await getCountries();
 
   return (
-    <div className="min-h-screen bg-[#0f172a] w-full">
-      {/* Fundo azul escuro profundo */}
-      <div className="w-full mx-auto space-y-8">
-        {/* Contador de países como na foto */}
-        <p className="text-gray-300 flex items-center gap-2 font-medium">
-          <span className="text-blue-500"></span>
-          {countries.length} países encontrados
-        </p>
-
-        {/* Container com Flexbox */}
-        <div className="flex flex-wrap justify-center p-6 gap-10">
-          {countries.map((country) => (
-            <CountryCard key={country.cca3} country={country} />
-          ))}
-        </div>
-      </div>
+    <div className="min-h-screen bg-[#0f172a] w-full text-white">
+      {/* Container principal com espaçamento seguro */}
+      <main className="max-w-350 mx-auto px-6 py-10 md:py-14 space-y-10">
+        {/* Listagem interativa com Busca e Filtros */}
+        <CountryList initialCountries={countries} />
+      </main>
     </div>
   );
 }

@@ -46,7 +46,7 @@ Caso queiras clonar e executar este projeto na tua máquina, segue os passos aba
 
 1. **Clona o repositório:**
    ```bash
-   git clone https://github.com/adry4nbr/nextjs-countries-challenge
+   git clone [https://github.com/adry4nbr/nextjs-countries-challenge](https://github.com/adry4nbr/nextjs-countries-challenge)
    ```
 2. **Entra na pasta do projeto:**
    ```bash

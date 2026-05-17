@@ -24,3 +24,14 @@ export const getCountryByCca3 = async (cca3: string): Promise<Country> => {
   const data = await response.json();
   return data[0]; // A API retorna um array, pegamos o primeiro item
 };
+
+export async function getCountryByCode(code: string) {
+  const response = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+
+  if (!response.ok) {
+    throw new Error("Erro ao buscar os detalhes do país");
+  }
+
+  const data = await response.json();
+  return data[0]; // A API retorna um array, pegamos o primeiro item
+}
