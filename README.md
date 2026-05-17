@@ -1,36 +1,64 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Countries Explorer 🌍
 
-## Getting Started
+Uma aplicação web moderna e interativa desenvolvida para explorar, filtrar e pesquisar informações detalhadas sobre países de todo o mundo, consumindo dados em tempo real da **REST Countries API**.
 
-First, run the development server:
+## 🔗 Deploy
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+O deploy do projeto foi realizado na Vercel e pode ser acedido através do link:
+👉 [Aceder ao Countries Explorer](https://nextjs-countries-challenge.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🛠️ Tecnologias Utilizadas
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+O projeto foi construído utilizando as ferramentas mais modernas do ecossistema Frontend atual:
 
-## Learn More
+- **Next.js 16** (utilizando o padrão App Router)
+- **React 19**
+- **Tailwind CSS v4** (estilização moderna e de alta performance através de configuração direta no CSS)
+- **TypeScript** (garantindo tipagem estática e maior segurança no código)
 
-To learn more about Next.js, take a look at the following resources:
+---
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📋 Status do Projeto
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmente em desenvolvimento para o desafio técnico.
 
-## Deploy on Vercel
+### ✅ O que já foi feito
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- [x] **Configuração Base:** Setup inicial do Next.js 16 com TypeScript e Tailwind CSS v4.
+- [x] **Consumo de API:** Integração com a REST Countries API para listagem de dados.
+- [x] **Interface Responsiva:** Criação do layout principal adaptável para dispositivos móveis, tablets e desktops.
+- [x] **Refatoração de Layout (Flexbox):** Ajuste fino da estrutura de listagem utilizando Flexbox para garantir consistência visual no tamanho dos cards.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### ⏳ O que está a ser feito / Próximos Passos
+
+- [ ] **Alternador de Tema (Dark/Light Mode):** Implementação da funcionalidade para alternar dinamicamente entre os modos claro e escuro.
+- [ ] **Barra de Pesquisa:** Implementação do input para busca de países por nome.
+- [ ] **Filtro por Região:** Componente de seleção para filtrar os países por continente/sub-região.
+- [ ] **Página de Detalhes:** Criação da rota dinâmica para exibir informações aprofundadas de um país específico ao clicar no seu card.
+
+---
+
+## 🚀 Como rodar o projeto localmente
+
+Caso queiras clonar e executar este projeto na tua máquina, segue os passos abaixo:
+
+1. **Clona o repositório:**
+   ```bash
+   git clone https://github.com/adry4nbr/nextjs-countries-challenge
+   ```
+2. **Entra na pasta do projeto:**
+   ```bash
+   cd nextjs-countries-challenge
+   ```
+3. **Instala as dependências:**
+   ```bash
+   npm install
+   ```
+4. **Inicia o servidor de desenvolvimento:**
+   ```bash
+   npm run dev
+   ```
+5. **Abrir no navegador:**
+   Abre http://localhost:3000 para ver o resultado.
