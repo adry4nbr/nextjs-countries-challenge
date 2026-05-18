@@ -2,9 +2,10 @@ import { Country } from "@/types/country";
 
 const BASE_URL = "https://restcountries.com/v3.1";
 
+// 1. Busca todos os países para a página inicial (Agora INCLUI languages!)
 export const getCountries = async (): Promise<Country[]> => {
   const response = await fetch(
-    `${BASE_URL}/all?fields=name,flags,population,region,subregion,capital,cca3`,
+    `${BASE_URL}/all?fields=name,flags,population,region,subregion,capital,cca3,languages`,
   );
 
   if (!response.ok) {
@@ -14,24 +15,14 @@ export const getCountries = async (): Promise<Country[]> => {
   return response.json();
 };
 
-export const getCountryByCca3 = async (cca3: string): Promise<Country> => {
+// 2. Busca os detalhes de um país específico pelo código cca3 (Usado na página de detalhes)
+export const getCountryByCode = async (cca3: string): Promise<Country> => {
   const response = await fetch(`${BASE_URL}/alpha/${cca3}`);
 
   if (!response.ok) {
-    throw new Error("País não encontrado");
+    throw new Error("País não encontrado ou erro ao buscar detalhes");
   }
 
   const data = await response.json();
   return data[0]; // A API retorna um array, pegamos o primeiro item
 };
-
-export async function getCountryByCode(code: string) {
-  const response = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
-
-  if (!response.ok) {
-    throw new Error("Erro ao buscar os detalhes do país");
-  }
-
-  const data = await response.json();
-  return data[0]; // A API retorna um array, pegamos o primeiro item
-}

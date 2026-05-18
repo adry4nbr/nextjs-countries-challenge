@@ -39,7 +39,7 @@ Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmen
 
 ### ⏳ O que está a ser feito / Próximos Passos
 
-- [ ] **Filtro por língua** Filtro para separar os países por línguas faladas
+- [ ] **Filtro por idioma** Filtro para separar os países por idioma faladas
 
 ---
 
