@@ -1,5 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // Interface principal para a lista de países
 export interface Country {
+  area: any;
+  landlocked: any;
+  unMember: any;
+  timezones: boolean;
+  currencies: any;
   name: {
     common: string;
     official: string;
