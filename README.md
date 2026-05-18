@@ -36,10 +36,11 @@ Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmen
 - [x] **Página de Detalhes:** Criação da rota dinâmica para exibir informações aprofundadas de um país específico ao clicar no seu card.
 - [x] **Criar a tela de Carregamento (Loading/Skeleton)** Para quando o site estiver puxando os dados da API.
 - [x] **Ajustar o design/CSS** Garantir que os cards e a página de detalhes estejam bonitos e responsivos
+- [x] **Filtro por idioma** Filtro para separar os países por idioma faladas
 
 ### ⏳ O que está a ser feito / Próximos Passos
 
-- [ ] **Filtro por idioma** Filtro para separar os países por idioma faladas
+- [ ] **Ajustes na tela de detalhes** Colocar um layout mais chamativo
 
 ---
 
