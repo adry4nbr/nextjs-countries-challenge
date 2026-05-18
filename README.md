@@ -35,10 +35,11 @@ Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmen
 - [x] **Filtro por Região:** Componente de seleção para filtrar os países por continente/sub-região.
 - [x] **Página de Detalhes:** Criação da rota dinâmica para exibir informações aprofundadas de um país específico ao clicar no seu card.
 - [x] **Criar a tela de Carregamento (Loading/Skeleton)** Para quando o site estiver puxando os dados da API.
+- [x] **Ajustar o design/CSS** Garantir que os cards e a página de detalhes estejam bonitos e responsivos
 
 ### ⏳ O que está a ser feito / Próximos Passos
 
-- [ ] **Ajustar o design/CSS** Garantir que os cards e a página de detalhes estejam bonitos e responsivos
+- [ ] **Filtro por língua** Filtro para separar os países por línguas faladas
 
 ---
 
