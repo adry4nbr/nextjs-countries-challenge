@@ -35,8 +35,8 @@ export default function Header() {
   return (
     <header className="w-full bg-white dark:bg-gray-800 shadow-md py-6 px-4 md:px-16 flex justify-between items-center transition-colors">
       <Link href="/">
-        <h1 className="font-extrabold text-lg md:text-2xl text-gray-900 dark:text-white cursor-pointer">
-          Para qual país ?
+        <h1 className="font-extrabold text-lg md:text-2xl cursor-pointer transition-all bg-linear-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:brightness-110">
+          Countries Explorer
         </h1>
       </Link>
 
