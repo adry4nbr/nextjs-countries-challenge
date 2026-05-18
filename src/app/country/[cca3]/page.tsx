@@ -23,7 +23,6 @@ export default async function CountryDetailsPage({ params }: PageProps) {
         .join(", ")
     : "N/A";
 
-  // Forçamos o TypeScript a tratar como um array de strings para liberar o .join()
   const timezonesArray = country.timezones as unknown as string[] | undefined;
 
   const timezone =
@@ -33,14 +32,48 @@ export default async function CountryDetailsPage({ params }: PageProps) {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0f172a] text-gray-900 dark:text-white w-full transition-colors duration-300">
-      <div className="max-w-4xl mx-auto px-6 py-12 space-y-10">
-        {/* Botão de Voltar */}
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 bg-white dark:bg-[#1f2937] text-gray-800 dark:text-white px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm font-medium shadow-md cursor-pointer"
-        >
-          ← Voltar para a listagem
-        </Link>
+      <div className="max-w-4xl mx-auto px-6 py-2 space-y-10">
+        {/* Barra de Ações: Voltar + Ver no Maps */}
+        <div className="flex flex-wrap items-center gap-4">
+          {/* Botão de Voltar */}
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 bg-white dark:bg-[#1f2937] text-gray-800 dark:text-white px-6 py-2.5 rounded-xl border border-gray-200 dark:border-gray-700/50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-sm font-medium shadow-md cursor-pointer"
+          >
+            ← Voltar para a listagem
+          </Link>
+
+          {/* Botão do Google Maps (Só renderiza se o link existir na API) */}
+          {country.maps?.googleMaps && (
+            <a
+              href={country.maps.googleMaps}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-linear-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-md transition-all hover:shadow-green-500/20 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+                className="w-4 h-4"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              Ver no Google Maps
+            </a>
+          )}
+        </div>
 
         {/* Seção Principal: Bandeira e Nome */}
         <div className="flex flex-col md:flex-row gap-8 items-center border-b border-gray-200 dark:border-gray-800 pb-8">
@@ -65,9 +98,8 @@ export default async function CountryDetailsPage({ params }: PageProps) {
         {/* Grid de Cards de Informação */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Card 1: Geografia & Território */}
-          {/* Cores: Fundo azul suave no claro | Gradiente azul/ciano escuro no dark */}
           <section className="bg-blue-50/60 dark:bg-linear-to-br dark:from-[#1e293b] dark:to-[#0f172a] p-6 rounded-2xl border border-blue-100 dark:border-blue-900/30 shadow-md space-y-4 transition-all">
-            {/* Cabeçalho com a Barrinha vertical ao lado do nome */}
+            {/* Cabeçalho */}
             <div className="flex items-center gap-2.5 border-b border-blue-200/50 dark:border-gray-700/50 pb-3">
               {/* A Barrinha Vertical */}
               <div className="w-1.5 h-5 bg-blue-500 dark:bg-blue-400 rounded-full flex-none" />
@@ -117,9 +149,8 @@ export default async function CountryDetailsPage({ params }: PageProps) {
           </section>
 
           {/* Card 2: Cultura & Sociedade */}
-          {/* Cores: Fundo roxo suave no claro | Gradiente roxo/indigo escuro no dark */}
           <section className="bg-purple-50/60 dark:bg-linear-to-br dark:from-[#1e293b] dark:to-[#0f172a] p-6 rounded-2xl border border-purple-100 dark:border-purple-900/30 shadow-md space-y-4 transition-all">
-            {/* Cabeçalho com a Barrinha vertical ao lado do nome */}
+            {/* Cabeçalho*/}
             <div className="flex items-center gap-2.5 border-b border-purple-200/50 dark:border-gray-700/50 pb-3">
               {/* A Barrinha Vertical */}
               <div className="w-1.5 h-5 bg-purple-500 dark:bg-purple-400 rounded-full flex-none" />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nunito_Sans } from "next/font/google"; // Fonte comum para esse desafio
+import { Nunito_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
 

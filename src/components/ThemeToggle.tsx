@@ -4,7 +4,7 @@
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const [darkMode, setDarkMode] = useState(true); // Começa como escuro por padrão
+  const [darkMode, setDarkMode] = useState(true);
 
   // Executa apenas uma vez ao carregar a página para checar o localStorage
   useEffect(() => {
@@ -35,7 +35,6 @@ export default function ThemeToggle() {
       onClick={toggleTheme}
       className="flex items-center gap-2 bg-[#1f2937] dark:bg-[#1f2937] light-theme-btn border border-gray-700/50 dark:border-gray-700/50 px-4 py-2 rounded-xl text-sm font-medium shadow-md hover:scale-105 transition-transform cursor-pointer"
       style={{
-        // Cores específicas para quando NÃO for dark mode (Modo Claro)
         backgroundColor: !darkMode ? "#e2e8f0" : undefined,
         borderColor: !darkMode ? "#cbd5e1" : undefined,
         color: !darkMode ? "#1e293b" : "#ffffff",

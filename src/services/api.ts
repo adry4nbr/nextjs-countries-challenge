@@ -2,7 +2,7 @@ import { Country } from "@/types/country";
 
 const BASE_URL = "https://restcountries.com/v3.1";
 
-// 1. Busca todos os países para a página inicial (Agora INCLUI languages!)
+// 1. Busca todos os países para a página inicial
 export const getCountries = async (): Promise<Country[]> => {
   const response = await fetch(
     `${BASE_URL}/all?fields=name,flags,population,region,subregion,capital,cca3,languages`,
@@ -24,5 +24,5 @@ export const getCountryByCode = async (cca3: string): Promise<Country> => {
   }
 
   const data = await response.json();
-  return data[0]; // A API retorna um array, pegamos o primeiro item
+  return data[0];
 };

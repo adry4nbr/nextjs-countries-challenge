@@ -38,10 +38,7 @@ Abaixo encontras o mapeamento do que já foi consolidado e do que está atualmen
 - [x] **Ajustar o design/CSS** Garantir que os cards e a página de detalhes estejam bonitos e responsivos
 - [x] **Filtro por idioma** Filtro para separar os países por idioma faladas
 - [x] **Ajustes na tela de detalhes** Colocar um layout atrativo e adicionar novas informações
-
-### ⏳ O que está a ser feito / Próximos Passos
-
-- [ ] **Colocar o Google Maps** Colocar um botão na page de detalhes para abrir o Google Maps daquele país
+- [x] **Colocar o Google Maps** Colocar um botão na page de detalhes para abrir o Google Maps daquele país
 
 ---
 

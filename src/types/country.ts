@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // Interface principal para a lista de países
 export interface Country {
+  maps?: {
+    googleMaps: string;
+    openStreetMaps?: string;
+  };
   area: any;
   landlocked: any;
   unMember: any;
@@ -16,9 +20,9 @@ export interface Country {
     alt: string;
   };
   population: number;
-  region: string; // Continente
+  region: string;
   subregion?: string;
   capital?: string[];
-  cca3: string; // Código de 3 letras (usaremos para a rota de detalhes)
+  cca3: string;
   languages?: Record<string, string>;
 }

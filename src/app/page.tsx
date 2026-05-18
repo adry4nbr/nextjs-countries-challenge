@@ -2,7 +2,6 @@ import { getCountries } from "@/services/api";
 import CountryList from "@/components/CountryList";
 
 export default async function Home() {
-  // Busca os dados no servidor (ótimo para SEO e performance inicial)
   const countries = await getCountries();
 
   return (

@@ -21,7 +21,7 @@ export default function CountryList({ initialCountries }: CountryListProps) {
   const subregionRef = useRef<HTMLDivElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
 
-  // 1. Extrair sub-regiões únicas
+  // Extrair sub-regiões únicas
   const subregions = useMemo(() => {
     const set = new Set<string>();
     initialCountries.forEach((c) => {
@@ -30,7 +30,7 @@ export default function CountryList({ initialCountries }: CountryListProps) {
     return Array.from(set).sort();
   }, [initialCountries]);
 
-  // 2. Extrair idiomas únicos
+  // Extrair idiomas únicos
   const languages = useMemo(() => {
     const set = new Set<string>();
     initialCountries.forEach((c) => {
@@ -61,7 +61,7 @@ export default function CountryList({ initialCountries }: CountryListProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // 3. Filtrar os países
+  // Filtrar os países
   const filteredCountries = useMemo(() => {
     return initialCountries.filter((country) => {
       const matchesSearch = country.name.common
@@ -131,7 +131,6 @@ export default function CountryList({ initialCountries }: CountryListProps) {
             </button>
 
             {isSubregionOpen && (
-              /* max-h-60 (tamanho fixo) e overflow-y-auto (rolagem ligada) */
               <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1 scrollbar-thin">
                 <button
                   onClick={() => {
@@ -173,7 +172,6 @@ export default function CountryList({ initialCountries }: CountryListProps) {
             </button>
 
             {isLanguageOpen && (
-              /* max-h-60 (tamanho fixo) e overflow-y-auto (rolagem ligada) */
               <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1 scrollbar-thin">
                 <button
                   onClick={() => {
@@ -201,16 +199,32 @@ export default function CountryList({ initialCountries }: CountryListProps) {
           </div>
         </div>
       </div>
+      <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
+        {/* Ícone Bancário de Setinha Subindo (Crescimento/Indicador) */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={2.5}
+          stroke="currentColor"
+          className="w-4 h-4 text-emerald-500 dark:text-emerald-400 flex-none"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
+          />
+        </svg>
 
-      {/* Contador */}
-      <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-        <span className="text-blue-500 dark:text-blue-400 font-bold">
-          {filteredCountries.length}
-        </span>{" "}
-        países encontrados
-      </p>
-
-      {/* Grid Responsivo */}
+        <p>
+          <strong className="text-gray-900 dark:text-white font-extrabold text-base mr-1">
+            {filteredCountries.length}
+          </strong>
+          <strong className="font-semibold text-gray-800 dark:text-gray-200">
+            países encontrados
+          </strong>
+        </p>
+      </div>
       {filteredCountries.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
           {filteredCountries.map((country) => (
