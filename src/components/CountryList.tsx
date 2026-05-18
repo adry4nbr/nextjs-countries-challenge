@@ -1,47 +1,33 @@
 "use client";
 
-import { useState, useMemo, useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Country } from "@/types/country";
 import CountryCard from "./CountryCard";
+import { useCountryFilters } from "@/hooks/useCountryFilters";
 
 interface CountryListProps {
   initialCountries: Country[];
 }
 
 export default function CountryList({ initialCountries }: CountryListProps) {
-  const [search, setSearch] = useState("");
-  const [selectedSubregion, setSelectedSubregion] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const {
+    search,
+    setSearch,
+    selectedSubregion,
+    setSelectedSubregion,
+    selectedLanguage,
+    setSelectedLanguage,
+    subregions,
+    languages,
+    filteredCountries,
+  } = useCountryFilters(initialCountries);
 
-  // Estados para controlar a abertura dos menus customizados
   const [isSubregionOpen, setIsSubregionOpen] = useState(false);
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
-  // Refs para fechar o menu se clicar fora dele
   const subregionRef = useRef<HTMLDivElement>(null);
   const languageRef = useRef<HTMLDivElement>(null);
 
-  // Extrair sub-regiões únicas
-  const subregions = useMemo(() => {
-    const set = new Set<string>();
-    initialCountries.forEach((c) => {
-      if (c.subregion) set.add(c.subregion);
-    });
-    return Array.from(set).sort();
-  }, [initialCountries]);
-
-  // Extrair idiomas únicos
-  const languages = useMemo(() => {
-    const set = new Set<string>();
-    initialCountries.forEach((c) => {
-      if (c.languages) {
-        Object.values(c.languages).forEach((lang) => set.add(lang as string));
-      }
-    });
-    return Array.from(set).sort();
-  }, [initialCountries]);
-
-  // Fechar menus ao clicar fora
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -61,31 +47,10 @@ export default function CountryList({ initialCountries }: CountryListProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Filtrar os países
-  const filteredCountries = useMemo(() => {
-    return initialCountries.filter((country) => {
-      const matchesSearch = country.name.common
-        .toLowerCase()
-        .includes(search.toLowerCase());
-
-      const matchesSubregion = selectedSubregion
-        ? country.subregion === selectedSubregion
-        : true;
-
-      const matchesLanguage = selectedLanguage
-        ? country.languages &&
-          Object.values(country.languages).includes(selectedLanguage)
-        : true;
-
-      return matchesSearch && matchesSubregion && matchesLanguage;
-    });
-  }, [search, selectedSubregion, selectedLanguage, initialCountries]);
-
   return (
     <div className="space-y-8">
-      {/* Barra de Ferramentas: Busca + Filtros */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 z-20 relative">
-        {/* Campo de Busca */}
+        {/* Busca */}
         <div className="relative w-full lg:max-w-md group">
           <span className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-gray-400 group-focus-within:text-blue-500 transition-colors">
             <svg
@@ -105,6 +70,8 @@ export default function CountryList({ initialCountries }: CountryListProps) {
           </span>
           <input
             type="text"
+            id="search-country"
+            name="search-country"
             placeholder="Pesquise por um país..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -112,11 +79,12 @@ export default function CountryList({ initialCountries }: CountryListProps) {
           />
         </div>
 
-        {/* Container dos Dropdowns Customizados */}
+        {/* Filtros */}
         <div className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-          {/* Dropdown de Sub-região */}
+          {/* Dropdown Sub-região */}
           <div className="relative w-full sm:w-60" ref={subregionRef}>
             <button
+              type="button"
               onClick={() => setIsSubregionOpen(!isSubregionOpen)}
               className="w-full bg-white dark:bg-[#1f2937] text-gray-900 dark:text-white py-3 px-4 rounded-xl border border-gray-200 dark:border-gray-700/50 text-sm shadow-sm flex justify-between items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/80 transition-colors"
             >
@@ -129,20 +97,21 @@ export default function CountryList({ initialCountries }: CountryListProps) {
                 ▼
               </span>
             </button>
-
             {isSubregionOpen && (
-              <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1 scrollbar-thin">
+              <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1">
                 <button
+                  type="button"
                   onClick={() => {
                     setSelectedSubregion("");
                     setIsSubregionOpen(false);
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600/50 cursor-pointer"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600/50"
                 >
                   Todas as Sub-regiões
                 </button>
                 {subregions.map((sub) => (
                   <button
+                    type="button"
                     key={sub}
                     onClick={() => {
                       setSelectedSubregion(sub);
@@ -157,9 +126,10 @@ export default function CountryList({ initialCountries }: CountryListProps) {
             )}
           </div>
 
-          {/* Dropdown de Idioma */}
+          {/* Dropdown Idioma */}
           <div className="relative w-full sm:w-60" ref={languageRef}>
             <button
+              type="button"
               onClick={() => setIsLanguageOpen(!isLanguageOpen)}
               className="w-full bg-white dark:bg-[#1f2937] text-gray-900 dark:text-white py-3 px-4 rounded-xl border border-gray-200 dark:border-gray-700/50 text-sm shadow-sm flex justify-between items-center cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700/80 transition-colors"
             >
@@ -170,20 +140,21 @@ export default function CountryList({ initialCountries }: CountryListProps) {
                 ▼
               </span>
             </button>
-
             {isLanguageOpen && (
-              <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1 scrollbar-thin">
+              <div className="absolute left-0 right-0 mt-2 max-h-60 overflow-y-auto bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700/80 rounded-xl shadow-xl z-50 py-1">
                 <button
+                  type="button"
                   onClick={() => {
                     setSelectedLanguage("");
                     setIsLanguageOpen(false);
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600/50 cursor-pointer"
+                  className="w-full text-left px-4 py-2 text-sm text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-600/50"
                 >
                   Todos os Idiomas
                 </button>
                 {languages.map((lang) => (
                   <button
+                    type="button"
                     key={lang}
                     onClick={() => {
                       setSelectedLanguage(lang);
@@ -199,8 +170,9 @@ export default function CountryList({ initialCountries }: CountryListProps) {
           </div>
         </div>
       </div>
+
+      {/* Contador */}
       <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400 text-sm">
-        {/* Ícone Bancário de Setinha Subindo (Crescimento/Indicador) */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -215,7 +187,6 @@ export default function CountryList({ initialCountries }: CountryListProps) {
             d="M2.25 18 9 11.25l4.306 4.306a11.95 11.95 0 0 1 5.814-5.518l2.74-1.22m0 0-5.94-2.281m5.94 2.28-2.28 5.941"
           />
         </svg>
-
         <p>
           <strong className="text-gray-900 dark:text-white font-extrabold text-base mr-1">
             {filteredCountries.length}
@@ -225,6 +196,8 @@ export default function CountryList({ initialCountries }: CountryListProps) {
           </strong>
         </p>
       </div>
+
+      {/* Grid */}
       {filteredCountries.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
           {filteredCountries.map((country) => (
@@ -234,7 +207,7 @@ export default function CountryList({ initialCountries }: CountryListProps) {
       ) : (
         <div className="text-center py-12">
           <p className="text-gray-400 text-lg">
-            Nenhum país encontrado para os filtros selecionados. 🔍
+            Nenhum país encontrado para os filtros selecionados.
           </p>
         </div>
       )}
